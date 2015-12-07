@@ -8,7 +8,7 @@ RUN yum -y install epel-release \
  && pip install copr-cli \
  && rpmdev-setuptree \
  && cd /root/rpmbuild/SOURCES \
- && curl -sLO https://github.com/lkarsten/libvmod-header/archive/${LIBVMOD_HEADER_GIT_BRANCH}.tar.gz#/libvmod-header-${LIBVMOD_HEADER_GIT_BRANCH}.tar.gz
+ && curl -sLO https://github.com/varnish/libvmod-header/archive/${LIBVMOD_HEADER_GIT_BRANCH}.tar.gz#/libvmod-header-${LIBVMOD_HEADER_GIT_BRANCH}.tar.gz
 
 ADD libvmod-header.spec /root/rpmbuild/SPECS/
 

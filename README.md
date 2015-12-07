@@ -5,4 +5,3 @@ A Dockerfile to build [varnish/libvmod-header for varnish 4.1](https://github.co
 
 ## License
 MIT
-
