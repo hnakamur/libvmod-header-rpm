@@ -1,19 +1,20 @@
 FROM centos:7
 MAINTAINER Hiroaki Nakamura <hnakamur@gmail.com>
 
-ENV LIBVMOD_HEADER_GIT_BRANCH 4.1
+RUN yum -y install mock rpm-build rpmdevtools patch sudo curl less scl-utils scl-utils-build \
+ && useradd -G mock builder \
+ && echo 'builder ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/builder
 
-RUN yum -y install epel-release \
- && yum -y install rpmdevtools rpm-build patch python-pip \
- && pip install copr-cli \
- && rpmdev-setuptree \
- && cd /root/rpmbuild/SOURCES \
- && curl -sLO https://github.com/varnish/libvmod-header/archive/${LIBVMOD_HEADER_GIT_BRANCH}.tar.gz#/libvmod-header-${LIBVMOD_HEADER_GIT_BRANCH}.tar.gz
+USER builder
+RUN rpmdev-setuptree
+WORKDIR /home/builder/rpmbuild
 
-ADD libvmod-header.spec /root/rpmbuild/SPECS/
+ADD SPECS/ ./SPECS/
+ADD SOURCES/ ./SOURCES/
+ADD scripts/ ./
+USER root
+RUN chown -R builder:builder . \
+ && chmod +x ./*.sh
+USER builder
 
-RUN cd /root/rpmbuild/SPECS \
- && rpmbuild -bs libvmod-header.spec
-
-ADD copr-build.sh /root/
-ENTRYPOINT ["/bin/bash", "/root/copr-build.sh"]
+CMD ["./build.sh", "copr"]
