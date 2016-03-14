@@ -2,11 +2,11 @@
 
 Name:              libvmod-header
 Version:           20151207
-Release:           1%{?dist}
+Release:           1.el6
 Summary:           Varnish Cookie VMOD
 License:           FreeBSD
 Source:            https://github.com/varnish/libvmod-header/archive/%{libvmod_header_git_branch}.tar.gz#/libvmod-header-%{libvmod_header_git_branch}.tar.gz
-URL:               https://www.varnish-cache.org/vmod/header
+URL:               https://www.varnish-cache.org/vmods
 Requires:          varnish >= 4.1.0
 BuildRequires:     varnish-libs-devel >= 4.1.0
 BuildRequires:     git
@@ -25,7 +25,7 @@ Developed by Varnish Software. Sponsored by Softonic.com
 
 %build
 ./autogen.sh
-./configure --prefix=%{_prefix}
+%configure --prefix=%{_prefix}
 make
 
 %install
