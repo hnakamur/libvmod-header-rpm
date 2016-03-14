@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gem 'airborne'
+gem 'rake'
+gem 'serverspec'
+gem 'colorize'
+gem 'docker-api'
+gem 'rspec-retry'
+gem 'rspec_junit_formatter'
+gem 'specinfra-backend-docker_compose'
