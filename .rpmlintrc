@@ -1,0 +1,2 @@
+addFilter("description-line-too-long")
+addFilter("W: invalid-license")
